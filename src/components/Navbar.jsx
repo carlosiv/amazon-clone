@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../assets/images/amazon_logo1.png";
 import searchIcon from "../assets/images/searchIcon.png";
+import basketIcon from "../assets/images/basket-icon.png";
 
 const Navbar = () => {
   return (
@@ -25,9 +26,18 @@ const Navbar = () => {
             <p>Return</p>
             <p>& Orders</p>
           </NavButton>
-          <BasketButton></BasketButton>
+          <BasketButton>
+            <img src={basketIcon} alt="basket icon" />
+            <p>0</p>
+          </BasketButton>
         </RightContainer>
       </Inner>
+      <MobileSearchbar>
+        <input type="text" placeholder="Search..." />
+        <SearchIcon>
+          <img src={searchIcon} alt="search icon" />
+        </SearchIcon>
+      </MobileSearchbar>
     </Container>
   );
 };
@@ -41,12 +51,21 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+
+  @media only screen and (max-width: 767px) {
+    height: 120px;
+    flex-direction: column;
+  }
 `;
 
 const Inner = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+
+  @media only screen and (max-width: 767px) {
+    justify-content: space-between;
+  }
 `;
 
 const Logo = styled.div`
@@ -76,6 +95,30 @@ const Searchbar = styled.div`
     &::placeholder {
       padding-left: 5px;
     }
+  }
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+`;
+
+const MobileSearchbar = styled.div`
+  height: 35px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  input {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    &::placeholder {
+      padding-left: 10px;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    display: none;
   }
 `;
 
@@ -109,9 +152,11 @@ const NavButton = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
   margin-right: 15px;
   p {
+    margin: 0px; //fix height issue
     &:nth-child(1) {
       font-size: 12px;
     }
